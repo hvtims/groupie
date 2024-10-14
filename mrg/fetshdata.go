@@ -35,36 +35,6 @@ func fetchArtists(apiURL string) (Artists, error) {
 	return artists, nil
 }
 
-// func fetchLocations(apiURL string) (location, error) {
-// 	resp, err := http.Get(apiURL)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	defer resp.Body.Close()
-
-// 	var location location
-// 	err = json.NewDecoder(resp.Body).Decode(&location)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return location, nil
-// }
-
-// func fetchDates(apiURL string) (date, error) {
-// 	resp, err := http.Get(apiURL)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	defer resp.Body.Close()
-
-// 	var date date
-// 	err = json.NewDecoder(resp.Body).Decode(&date)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return date, nil
-// }
-
 func fetchRelations(artist Artist) (Artist, error) {
 	resp, err := http.Get(artist.Relations)
 	if err != nil {
@@ -73,6 +43,19 @@ func fetchRelations(artist Artist) (Artist, error) {
 	defer resp.Body.Close()
 
 	err = json.NewDecoder(resp.Body).Decode(&artist.Relation)
+	if err != nil {
+		return artist, err
+	}
+	return artist, nil
+}
+
+func fetchLocation(artist Artist) (Artist, error) {
+	resp, err := http.Get(artist.Locations)
+	if err != nil {
+		return artist, err
+	}
+	defer resp.Body.Close()
+	err = json.NewDecoder(resp.Body).Decode(&artist.Location)
 	if err != nil {
 		return artist, err
 	}

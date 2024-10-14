@@ -77,17 +77,26 @@
 
             <p><strong>Creation Date:</strong> {{.CreationDate}}</p>
             <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-            <p><strong>Relations :</strong></p>
-                {{range $key, $value := .Relation.DatesLocations}}
-                <ul>
-                    <li>{{$key}}</li>
-                    {{range $value}}
-                        <ul>
-                            <li>{{.}}</li>
-                        </ul>
-                    {{end}}
-                </ul>
+
+            <h3>Relations:</h3>
+            {{range $key, $value := .Relation.DatesLocations}}
+            <ul>
+                <li>{{$key}}</li>
+                {{range $value}}
+                    <ul>
+                        <li>{{.}}</li>
+                    </ul>
+                {{end}}
+            </ul>
             {{end}}
+
+            <h3>Locations:</h3>
+            <ol>
+                {{range .Location.Locations}}
+                <li>{{.}}</li>
+                {{end}}
+            </ol>
+
         </div>
     </div>
 </body>
