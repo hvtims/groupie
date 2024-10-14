@@ -8,10 +8,14 @@ import (
 
 func HandlePage(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
-	idd, _ := strconv.Atoi(id)
-	if idd <= 0 || idd >= 53 {
+	idd, err := strconv.Atoi(id)
+	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		http.ServeFile(w, r, "frontend/404.html")
+		return
+	}
+	if idd <= 0 || idd >= 53 {
+		http.Redirect(w, r, "/404", http.StatusFound)
 		return
 	}
 	apiURL := "https://groupietrackers.herokuapp.com/api/artists/" + id
