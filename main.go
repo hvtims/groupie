@@ -17,5 +17,6 @@ func main() {
 	fmt.Println("this is your port : http://localhost:8080/ ")
 	http.HandleFunc("/", mrg.HandleHome)
 	http.HandleFunc("/Artist/{id}", mrg.HandlePage)
+	http.HandleFunc("/404", mrg.ErrorHandler)
 	http.ListenAndServe(":8080", nil)
 }
