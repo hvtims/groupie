@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="frontend/styles.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <h1>Groupie Tracker</h1>
+    <div class="bands">
+        {{range .}}
+        <div class="band-info">
+            <h2>{{.Name}}</h2>
+            <a href="/Artist/{{.ID}}"> 
+                <img src="{{.Image}}" alt="{{.Name}} Image" width="200px">
+            </a>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>
