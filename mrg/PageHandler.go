@@ -36,6 +36,11 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "frontend/500.html")
 		return
 	}
+	artist, errrr := fetchDates(artist)
+	if errrr != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		http.ServeFile(w, r, "frontend/500.html")
+	}
 
 	tmpl, err := template.ParseFiles("frontend/band.html")
 	if err != nil {

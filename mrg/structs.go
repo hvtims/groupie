@@ -11,6 +11,8 @@ type Artist struct {
 	Relation     Relation
 	Locations    string `json:"locations"`
 	Location     Locations
+	Dates        string `json:"dates"`
+	Date         Dates
 }
 type Artists []Artist
 

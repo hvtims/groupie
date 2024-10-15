@@ -151,7 +151,15 @@
                     {{end}}
                 </ol>
             </div>
-
+            <div>
+                <h3>Dates:</h3>
+                <ol>
+                {{range .Date.Dates}}
+                <li>{{.}}</li>
+                {{end}}
+                </ol>
+            </div>
+            
         </div>
     </div>
 </body>
