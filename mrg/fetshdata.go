@@ -62,15 +62,17 @@ func fetchLocation(artist Artist) (Artist, error) {
 	return artist, nil
 }
 
-func fetchDates(artist Artist) (Artist, error) {
-	resp, err := http.Get(artist.Dates)
+var dates Dates
+
+func fetchDates(ala string) error {
+	resp, err := http.Get(ala)
 	if err != nil {
-		return artist, err
+		return err
 	}
 	defer resp.Body.Close()
-	err = json.NewDecoder(resp.Body).Decode(&artist.Date)
+	err = json.NewDecoder(resp.Body).Decode(&dates)
 	if err != nil {
-		return artist, err
+		return err
 	}
-	return artist, err
+	return nil
 }
