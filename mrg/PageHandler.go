@@ -10,8 +10,7 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	idd, err := strconv.Atoi(id)
 	if err != nil {
-		w.WriteHeader(http.StatusNotFound)
-		http.ServeFile(w, r, "frontend/404.html")
+		http.Redirect(w, r, "/404", http.StatusFound)
 		return
 	}
 	if idd <= 0 || idd >= 53 {
