@@ -1,7 +1,6 @@
 package mrg
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -19,8 +18,6 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	apiURL := "https://groupietrackers.herokuapp.com/api/artists/" + id
-	apiDates := "https://groupietrackers.herokuapp.com/api/dates/" + id
-
 	artist, err := fetchArtist(apiURL)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -38,10 +35,11 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "frontend/500.html")
 		return
 	}
-	errrr := fetchDates(apiDates)
+	artist, errrr := fetchDates(artist)
 	if errrr != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		http.ServeFile(w, r, "frontend/500.html")
+		return
 	}
 
 	tmpl, err := template.ParseFiles("frontend/band.html")
@@ -50,7 +48,6 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "frontend/500.html")
 		return
 	}
-	fmt.Println(dates)
 
 	tmpl.Execute(w, artist)
 }
