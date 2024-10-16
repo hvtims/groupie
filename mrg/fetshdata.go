@@ -62,7 +62,7 @@ func fetchLocation(artist Artist) (Artist, error) {
 	return artist, nil
 }
 
-var dates Dates
+// var dates Dates
 
 func fetchDates(artist Artist) (Artist, error) {
 	resp, err := http.Get(artist.Dates)
